@@ -62,14 +62,14 @@ Create a new Next.js application using:
 - TypeScript
 - Tailwind CSS
 - ESLint
-- npm
+- Yarn
 
 Suggested initialization:
 
 ```bash
-npx create-next-app@latest triply
+yarn create next-app triply
 cd triply
-npm run dev
+yarn dev
 ```
 
 Use the `src/` directory structure and App Router.

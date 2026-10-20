@@ -2,19 +2,71 @@
 
 :root {
   color-scheme: dark;
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #0e131d;
+  --foreground: #f0f5fc;
+  --surface: #1b2230;
+  --elevated: #1f304a;
+  --brand-strip: #131b29;
+  --secondary: #abbacf;
+  --accent: #619eff;
+  --primary: #2e61b2;
+  --primary-hover: #376fc8;
+  --success: #66d9a3;
+  --success-surface: #1b3833;
+  --warning: #ffc766;
+  --warning-surface: #3d3024;
+  --danger: #ffb4b4;
+  --danger-surface: #3a242e;
+  --border: #404f66;
+  --control-border: #697d99;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: Arial, Helvetica, sans-serif;
+  --color-surface: var(--surface);
+  --color-elevated: var(--elevated);
+  --color-brand-strip: var(--brand-strip);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-success: var(--success);
+  --color-success-surface: var(--success-surface);
+  --color-warning: var(--warning);
+  --color-warning-surface: var(--warning-surface);
+  --color-danger: var(--danger);
+  --color-danger-surface: var(--danger-surface);
+  --color-border: var(--border);
+  --color-control-border: var(--control-border);
+  --font-sans: "Inter", Arial, Helvetica, sans-serif;
   --font-mono: "Courier New", monospace;
+  --radius-card: 14px;
+  --radius-dock: 19px;
+  --text-page: 25px;
+  --text-page--line-height: 1.4;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+@layer base {
+  body { background: var(--background); color: var(--foreground); font-family: var(--font-sans); }
+  :where(a, button, input, select, textarea, [tabindex]):focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  ::selection { background: var(--primary); color: var(--foreground); }
+  button:not(:disabled), select:not(:disabled) { cursor: pointer; }
+}
+
+@layer components {
+  .ui-button { @apply inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-colors disabled:cursor-not-allowed disabled:opacity-50; }
+  .ui-button-primary { @apply bg-primary text-foreground hover:bg-primary-hover; }
+  .ui-button-outline { @apply rounded-card border border-border bg-surface text-accent hover:bg-elevated; }
+  .ui-button-ghost { @apply text-accent hover:bg-elevated; }
+  .ui-control { @apply min-h-12 w-full rounded-card border border-control-border bg-surface px-4 py-3 text-base text-foreground placeholder:text-secondary transition-colors focus-visible:border-accent disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-danger; }
+  .ui-link { @apply rounded-sm text-accent underline-offset-4 hover:underline; }
+  .ui-dialog { @apply fixed inset-0 m-auto max-h-[85svh] w-[calc(100%-2.25rem)] max-w-lg overflow-y-auto rounded-card border border-border bg-surface p-5 text-foreground shadow-2xl sm:p-6; }
+  .ui-dialog::backdrop { background: rgb(0 0 0 / 70%); }
+  .ui-dock { @apply fixed left-1/2 z-30 flex min-h-[57px] w-[calc(100%-2.25rem)] max-w-md -translate-x-1/2 rounded-dock border border-border bg-surface p-1 shadow-xl; bottom: max(8px, env(safe-area-inset-bottom)); }
+  .app-content { padding-bottom: calc(6rem + env(safe-area-inset-bottom)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
