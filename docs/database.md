@@ -104,8 +104,8 @@ by setting `trip_invitations.revoked_at`.
 `accept_trip_invitation({ p_token })` requires a signed-in user, validates the
 hash, expiry, and revocation, and inserts an ordinary membership. Acceptance is
 transactional and idempotent. Direct membership inserts and role changes are
-not granted to client roles. These are database primitives; invitation screens
-and link sharing remain in Phase 2.
+not granted to client roles. The [Step 2.3 invitation flow](invitations.md) uses
+these database primitives for link creation, revocation, and explicit joining.
 
 Use separate insert/update calls for votes and bookings. Ownership and scope
 columns are deliberately not updateable, so a generic upsert that updates every

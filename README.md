@@ -7,6 +7,8 @@ authentication and the **Step 1.5** design system from [the MVP plan](docs/mvp-p
 loading and error states, and protected navigation destinations.
 **Step 2.2** adds validated trip creation with automatic organizer membership
 and navigation to the new trip.
+**Step 2.3** adds invitation links, copy/share and revocation, explicit joining,
+and group member lists.
 See [database setup and verification](docs/database.md) for migration status and
 the local/hosted workflows. The initial migration has been applied and verified
 on the configured hosted Supabase project.
@@ -15,6 +17,7 @@ confirmation emails, sessions, account settings, and optional Google sign-in.
 See [the design system](docs/design-system.md) for tokens, reusable components,
 and the development preview at `/design-system`.
 See [Trips Home](docs/trips.md) for its behavior, scope, and integration tests.
+See [trip invitations](docs/invitations.md) for link management and the join flow.
 
 ## Local development
 
@@ -50,6 +53,7 @@ yarn typecheck
 yarn build
 yarn test:auth
 yarn test:trips
+yarn test:invitations
 yarn test:ui
 ```
 
@@ -89,7 +93,7 @@ When flight screens are implemented, show country flags beside airport codes
 and use 24-hour local airport times. Airline logos can wait.
 
 Update `src/config/site.ts` to change the working name and shared description.
-The next application step is **2.3: Implement trip invitations**. `/trips` lists
+The next application step is **2.4: Build the Trip Dashboard**. `/trips` lists
 the user's trips, `/trips/new` creates a trip, and `/trips/[tripId]` provides a
-read-only overview ahead of the full Step 2.4 dashboard. `/invite/[token]` remains a protected return destination
-until Step 2.3.
+trip summary, members, and invitation management ahead of the full Step 2.4
+dashboard. `/invite/[token]` lets authenticated travelers explicitly join a trip.

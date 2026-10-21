@@ -36,7 +36,8 @@ The **New trip** button navigates to the protected `/trips/new` creation form.
 Opening a trip displays a
 read-only overview with its real name, dates, status, and optional description;
 the full planning dashboard remains Step 2.4. Both destinations include a return
-link. Invitation acceptance remains Step 2.3.
+link. [Step 2.3](invitations.md) adds invitation management, acceptance, and group
+member lists alongside this summary.
 
 ## Creating a trip
 

@@ -18,7 +18,7 @@ Mailpit inbox, and the tests left no local user accounts behind.
 | `/auth/callback` | Exchanges an OAuth/PKCE code; handles cancelled or invalid links |
 | `/settings` | Verified account, email display, profile-name editing, and logout |
 | `/trips` | Private placeholder; trip listing/creation remains Phase 2 |
-| `/invite/[token]` | Private return destination; validating/accepting invitations remains Step 2.3 |
+| `/invite/[token]` | Protected invitation landing page and explicit join action; see `invitations.md` |
 
 Login/signup send already authenticated users to their validated destination.
 Unconfirmed accounts see a check-email state, without disclosing whether an
