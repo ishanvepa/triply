@@ -655,6 +655,8 @@ Airport names and country flags can be derived from a small airport metadata dat
 
 ## Step 2.6 — Implement flight proposals
 
+**Implemented:** See [flight-proposal behavior and verification](flights.md).
+
 **Figma references:** Frames 03, 04, 05, and 06
 
 This is the central feature of triply.

@@ -29,18 +29,18 @@ booking counts when a flight is selected. Statuses are derived from records:
 `not_decided` and `not_joining` alone do not imply that booking is underway.
 There is no separate status column or invented booking-complete status.
 
-Every card links to `/trips/[tripId]/legs/[legId]`, a member-only, read-only
-proposal list. It displays each existing option's airline, flight number,
+Every card links to `/trips/[tripId]/legs/[legId]`, a member-only proposal list.
+It displays each existing option's airline, flight number,
 price snapshot, and departure/arrival in the respective airport time zones
 using 24-hour times. The chosen option is marked Selected flight. A missing
 price differs from a zero price. No proposals produces an explicit empty state.
 
 Travel-leg creation/editing/reordering is available in [Step 2.5](travel-legs.md).
 Organizers add legs from the dashboard, move them using Up/Down, and open Edit leg
-from a leg's proposal page. Proposal submission,
-voting, flight selection, booking links, and booking-report editing remain in
-their later planned steps. The dashboard already reflects their database
-records; no nonfunctional Add flight control is shown.
+from a leg's proposal page. [Step 2.6](flights.md) adds manual proposal submission,
+details, and booking links through the leg's **+ Propose option** action.
+Voting, flight selection, and booking-report editing remain in their later
+planned steps. The dashboard already reflects their database records.
 
 ## Progress definitions
 

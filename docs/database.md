@@ -50,9 +50,9 @@ can be added later without changing the identity of users or memberships.
 
 Flight departures and arrivals use `timestamptz`, plus separate IANA airport
 time-zone fields. Validate local departure dates against the leg date and
-require arrival after departure. Display those instants in their respective
-airport time zones using 24-hour formatting when flight UI is implemented.
-Airport country flags will come from airport metadata, not these timestamps.
+require arrival after departure. The [Step 2.6 flight UI](flights.md) stores UTC
+instants and displays them in their respective airport time zones using 24-hour
+formatting. Airport country flags come from metadata, not these timestamps.
 
 Prices are optional nonnegative snapshots with a three-letter currency code;
 the default currency is USD. Booking links accept HTTP(S) URLs. No flight search,

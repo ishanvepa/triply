@@ -90,7 +90,7 @@ temporary grants and locks are restored. Tests never use hosted credentials.
 
 Deploy the migration with `yarn db:push --dry-run` followed by `yarn db:push`
 after confirming the configured project, as described in [database.md](database.md).
-Flight proposal submission remains Step 2.6.
+Flight proposal submission is available in [Step 2.6](flights.md).
 
 Step 2.5 verification: all 19 unit tests, 106 database assertions, the concurrency
 suite, and all 19 browser integration tests passed, along with database lint,

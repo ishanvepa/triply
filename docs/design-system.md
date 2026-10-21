@@ -77,8 +77,9 @@ is the close button. Body scrolling is locked while open. Use one modal at a tim
 The authenticated layout currently links to **Trips** and **Account**. The
 Figma Flights/Group destinations can be supplied through `items` when those
 routes exist. Branding remains in `src/config/site.ts` and `Brand`.
-Country flags beside airport codes and 24-hour local airport times remain
-requirements for the future flight components; airline logos are deferred.
+The [flight components](flights.md) show available country flags beside airport
+codes and use 24-hour local airport times. `AirlineDisplay` provides consistent
+airline-name text; official airline logos are deferred.
 
 ## Verification
 
