@@ -209,6 +209,12 @@ isOneToOne: false
 { Args: { "p_expires_at"?: string,"p_trip_id": string }; Returns: {
               "expires_at": string,"invitation_id": string,"token": string
             }[]
+                           },
+"create_trip_leg":
+{ Args: { "p_destination_airport": string,"p_origin_airport": string,"p_travel_date": string,"p_trip_id": string }; Returns: string
+                           },
+"reorder_trip_legs":
+{ Args: { "p_expected_leg_ids": (string)[],"p_leg_ids": (string)[],"p_trip_id": string }; Returns: undefined
                            }
           }
           Enums: {

@@ -31,3 +31,37 @@ export function validateTrip(form: FormData) {
   if (values.description.length > 5000) fields.description = "Keep the description to 5,000 characters or fewer.";
   return { values, fields, valid: Object.keys(fields).length === 0 };
 }
+
+export type TravelLegValues = { originAirport: string; destinationAirport: string; travelDate: string };
+export type TravelLegFormState = {
+  error?: string;
+  fields?: Partial<Record<keyof TravelLegValues, string>>;
+  values?: TravelLegValues;
+};
+export type LegOrderState = { error?: string; success?: string };
+
+export function validateTravelLeg(form: FormData) {
+  const values: TravelLegValues = {
+    originAirport: text(form, "originAirport").toUpperCase(),
+    destinationAirport: text(form, "destinationAirport").toUpperCase(),
+    travelDate: text(form, "travelDate"),
+  };
+  const fields: NonNullable<TravelLegFormState["fields"]> = {};
+  if (!/^[A-Z]{3}$/.test(values.originAirport)) fields.originAirport = "Enter a three-letter airport code.";
+  if (!/^[A-Z]{3}$/.test(values.destinationAirport)) fields.destinationAirport = "Enter a three-letter airport code.";
+  if (!fields.originAirport && !fields.destinationAirport && values.originAirport === values.destinationAirport) {
+    fields.destinationAirport = "Choose a different destination airport.";
+  }
+  if (!isCalendarDate(values.travelDate)) fields.travelDate = "Enter a valid travel date.";
+  return { values, fields, valid: Object.keys(fields).length === 0 };
+}
+
+export function moveLegOrder(order: string[], legId: string, direction: unknown): string[] | null {
+  if (new Set(order).size !== order.length || (direction !== "up" && direction !== "down")) return null;
+  const index = order.indexOf(legId);
+  const neighbor = index + (direction === "up" ? -1 : 1);
+  if (index < 0 || neighbor < 0 || neighbor >= order.length) return null;
+  const moved = [...order];
+  [moved[index], moved[neighbor]] = [moved[neighbor], moved[index]];
+  return moved;
+}
