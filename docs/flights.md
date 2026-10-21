@@ -76,10 +76,11 @@ that price and availability must be checked on the booking site. Missing links
 and prices have explicit states. No price refresh or booking verification is
 claimed.
 
-Interest is read-only in this step. The details page shows the actual interested
-count and group size, without treating voters for another option as undecided.
-Voting controls, percentages, and organizer selection remain Step 2.7. Proposal
-editing/deletion is not added by Step 2.6.
+The details page shows the actual interested count and group size, without
+treating voters for another option as undecided. Step 2.7 adds links from the
+options and details screens to [group decisions](voting.md), with voting,
+support percentages, and organizer confirmation. Proposal editing/deletion
+is not exposed in the current interface.
 
 ## Access and selected flights
 
