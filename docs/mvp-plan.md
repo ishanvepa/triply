@@ -607,6 +607,8 @@ These can be computed from the underlying records rather than stored as independ
 
 ## Step 2.5 — Implement travel legs
 
+**Implemented:** See [travel-leg behavior and verification](travel-legs.md).
+
 A trip can have multiple travel segments.
 
 For example:

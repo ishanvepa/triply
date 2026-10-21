@@ -1,6 +1,6 @@
 # Trip dashboard (Phase 2, Step 2.4)
 
-`/trips/[tripId]` is the group's read-only planning dashboard, based on
+`/trips/[tripId]` is the group's planning dashboard, based on
 [Figma Frame 02](https://www.figma.com/design/2HViNFR9Qmm1jSBDBcQ6F8?node-id=1-15).
 It uses the shared dark palette, elevated progress panel, and colored route
 cards, with responsive flow layout for dates, longer routes, and group controls.
@@ -35,10 +35,12 @@ price snapshot, and departure/arrival in the respective airport time zones
 using 24-hour times. The chosen option is marked Selected flight. A missing
 price differs from a zero price. No proposals produces an explicit empty state.
 
-Travel-leg creation/editing/reordering remains Step 2.5. Proposal submission,
+Travel-leg creation/editing/reordering is available in [Step 2.5](travel-legs.md).
+Organizers add legs from the dashboard, move them using Up/Down, and open Edit leg
+from a leg's proposal page. Proposal submission,
 voting, flight selection, booking links, and booking-report editing remain in
 their later planned steps. The dashboard already reflects their database
-records; no nonfunctional Add flight or Add leg controls are shown.
+records; no nonfunctional Add flight control is shown.
 
 ## Progress definitions
 
@@ -61,7 +63,8 @@ Data refreshes on navigation/reload; realtime subscriptions are not introduced.
 Pages verify the session and membership before loading planning records. Queries
 use the request-scoped Supabase client, include explicit trip filters, and remain
 subject to RLS. There is no service-role client, shared user-data cache, new
-migration, or database mutation in the dashboard.
+migration or database mutation for reading progress. [Travel-leg management](travel-legs.md)
+adds the authenticated organizer-only mutations separately.
 
 Missing/inaccessible trips and legs show the same Trip unavailable state. A leg
 from another trip cannot be loaded by changing the URL. Signed-out users return

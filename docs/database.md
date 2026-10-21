@@ -63,8 +63,10 @@ editing and voting. Booking records must reference that exact selection. Before
 changing a selected flight, travelers must remove any existing booking status
 records so a purchase report cannot silently transfer to another flight.
 Remove proposals before changing a leg's route or travel date. Reordering is
-supported by a deferrable unique `(trip_id, position)` constraint; a future
-reordering RPC should defer it within its transaction.
+supported by a deferrable unique `(trip_id, position)` constraint. The Step 2.5
+`reorder_trip_legs` RPC defers it within its transaction, locks the trip and legs,
+and rejects stale displayed orders. `create_trip_leg` uses the same trip lock
+to append without racing another app append or reorder. See [travel legs](travel-legs.md).
 
 Proposal, vote, and booking writes lock their travel-leg row. That serializes
 them with selection so a vote cannot pass a stale "voting open" check while an
@@ -136,7 +138,8 @@ the hosted project.
 
 `db:test:concurrency` uses separate connections to the local database on port
 54322. It verifies that voting and booking writes serialize with selection,
-then removes its isolated test fixtures. It never reads hosted credentials.
+then removes its isolated test fixtures. It also verifies concurrent travel-leg
+appends and stale reorder rejection. It never reads hosted credentials.
 
 `db:types` generates `src/types/database.types.ts` from the migrated local
 database. It writes atomically and keeps the old file if generation fails.

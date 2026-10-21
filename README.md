@@ -11,6 +11,8 @@ and navigation to the new trip.
 and group member lists.
 **Step 2.4** adds the trip dashboard, ordered travel-leg cards, computed planning
 and booking progress, and member-only navigation to existing flight proposals.
+**Step 2.5** adds organizer-only travel-leg creation, editing, and atomic ordering,
+with proposal locks and stale-update protection.
 See [database setup and verification](docs/database.md) for migration status and
 the local/hosted workflows. The initial migration has been applied and verified
 on the configured hosted Supabase project.
@@ -22,6 +24,7 @@ See [Trips Home](docs/trips.md) for its behavior, scope, and integration tests.
 See [trip invitations](docs/invitations.md) for link management and the join flow.
 See [the trip dashboard](docs/dashboard.md) for statuses, progress definitions,
 scope, and integration tests.
+See [travel legs](docs/travel-legs.md) for forms, ordering, and migration details.
 
 ## Local development
 
@@ -59,6 +62,7 @@ yarn test:auth
 yarn test:trips
 yarn test:invitations
 yarn test:dashboard
+yarn test:travel-legs
 yarn test:ui
 ```
 
@@ -98,9 +102,11 @@ When flight screens are implemented, show country flags beside airport codes
 and use 24-hour local airport times. Airline logos can wait.
 
 Update `src/config/site.ts` to change the working name and shared description.
-The next application step is **2.5: Implement travel legs**. `/trips` lists
+The next application step is **2.6: Implement flight proposals**. `/trips` lists
 the user's trips, `/trips/new` creates a trip, and `/trips/[tripId]` provides a
 dashboard with trip summary, travel legs, planning/booking progress, members,
 and invitation management. Travel-leg cards open the existing proposals at
 `/trips/[tripId]/legs/[legId]`. `/invite/[token]` lets authenticated travelers
 explicitly join a trip.
+Organizers add legs at `/trips/[tripId]/legs/new`, edit them from their proposal
+page, and reorder them on the dashboard.
