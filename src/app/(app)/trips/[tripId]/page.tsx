@@ -6,10 +6,11 @@ import { formatTripDates, getTripStatus } from "@/lib/trips/format";
 import { PageHeader } from "@/components/ui/page-header";
 import { Badge } from "@/components/ui/badge";
 import { EmptyState } from "@/components/ui/empty-state";
+import { ButtonLink } from "@/components/ui/button";
 import { MemberList } from "@/components/trips/member-list";
 import { InvitationManager } from "@/components/trips/invitation-manager";
 import { PlanningProgress } from "@/components/trips/planning-progress";
-import { TravelLegCard } from "@/components/trips/travel-leg-card";
+import { TravelLegList } from "@/components/trips/travel-leg-list";
 import { AirportName } from "@/components/trips/airport-name";
 import { summarizeDashboard } from "@/lib/trips/dashboard";
 
@@ -44,10 +45,14 @@ export default async function TripPage({ params }: { params: Promise<{ tripId: s
     </section>
     <PlanningProgress {...dashboard} />
     <section aria-labelledby="travel-legs-heading" className="space-y-4">
-      <h2 id="travel-legs-heading" className="text-base font-bold">Travel legs <span className="font-normal text-secondary">({dashboard.totalLegs})</span></h2>
-      {dashboard.legs.length ? <ol aria-label="Travel legs" className="space-y-4">
-        {dashboard.legs.map((leg, index) => <li key={leg.id}><TravelLegCard tripId={tripId} leg={leg} index={index} /></li>)}
-      </ol> : <EmptyState title="No travel legs yet" description="Your route will appear here once travel legs are added. Each leg will show flight options and planning progress." />}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h2 id="travel-legs-heading" className="text-base font-bold">Travel legs <span className="font-normal text-secondary">({dashboard.totalLegs})</span></h2>
+        {organizer && <ButtonLink href={`/trips/${tripId}/legs/new`} variant="outline">+ Add travel leg</ButtonLink>}
+      </div>
+      {dashboard.legs.length ? <TravelLegList tripId={tripId} legs={dashboard.legs} organizer={organizer} />
+        : <EmptyState title="No travel legs yet" description={organizer
+          ? "Add your first travel leg to start building the group's route."
+          : "Your route will appear here once the organizer adds travel legs."} />}
     </section>
     <div id="group" className="scroll-mt-6"><MemberList members={members} currentUserId={user.id} /></div>
     {organizer && <div id="invitations" className="scroll-mt-6"><InvitationManager tripId={tripId} invitations={invitations} now={now} /></div>}

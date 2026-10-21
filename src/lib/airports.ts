@@ -20,3 +20,5 @@ export function airportName(code: string) {
   const airport = getAirport(code);
   return airport ? `${airport.city} (${code})` : code;
 }
+
+export const airportOptions = Object.entries(airports).map(([code, airport]) => ({ code, city: airport.city }));

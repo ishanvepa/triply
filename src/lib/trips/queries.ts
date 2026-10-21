@@ -1,6 +1,7 @@
 import "server-only";
 import { requireUser } from "@/lib/auth/session";
 import { createClient } from "@/lib/supabase/server";
+import { isUuid } from "@/lib/invitations";
 
 // Use the verified session and membership explicitly as well as database RLS.
 // Never use a service-role client or globally cache user-specific results.
@@ -64,4 +65,15 @@ export async function getTripPlanningData(tripId: string) {
   ]);
   if (legs.error || proposals.error || bookings.error) throw new Error("Unable to load trip planning. Please try again.");
   return { legs: legs.data, proposals: proposals.data, bookings: bookings.data };
+}
+
+export async function getTripLeg(tripId: string, legId: string) {
+  await requireUser();
+  if (!isUuid(tripId) || !isUuid(legId)) return null;
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("trip_legs")
+    .select("id, origin_airport, destination_airport, travel_date, updated_at, proposals:flight_proposals!flight_proposals_trip_leg_id_trip_id_fkey(count)")
+    .eq("trip_id", tripId).eq("id", legId).maybeSingle();
+  if (error) throw new Error("Unable to load this travel leg. Please try again.");
+  return data;
 }

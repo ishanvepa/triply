@@ -38,7 +38,7 @@ export type TravelLegFormState = {
   fields?: Partial<Record<keyof TravelLegValues, string>>;
   values?: TravelLegValues;
 };
-export type LegOrderState = { error?: string; success?: string };
+export type LegOrderState = { error?: string; success?: string; movedLegId?: string };
 
 export function validateTravelLeg(form: FormData) {
   const values: TravelLegValues = {

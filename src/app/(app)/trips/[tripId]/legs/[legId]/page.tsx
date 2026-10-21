@@ -8,6 +8,7 @@ import { PageHeader } from "@/components/ui/page-header";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { EmptyState } from "@/components/ui/empty-state";
+import { ButtonLink } from "@/components/ui/button";
 
 export const metadata = { title: "Flight proposals" };
 
@@ -26,7 +27,9 @@ export default async function LegProposalsPage({ params }: { params: Promise<{ t
   const proposals = planning.proposals.filter(proposal => proposal.trip_leg_id === legId);
   return <div className="space-y-6">
     <PageHeader title={`${airportName(leg.origin_airport)} → ${airportName(leg.destination_airport)}`}
-      description={`${trip.name} · ${formatTripDates(leg.travel_date, leg.travel_date)}`} backHref={`/trips/${tripId}`} />
+      description={`${trip.name} · ${formatTripDates(leg.travel_date, leg.travel_date)}`} backHref={`/trips/${tripId}`}
+      action={trip.membership.some(member => member.role === "organizer")
+        ? <ButtonLink href={`/trips/${tripId}/legs/${legId}/edit`} variant="outline">Edit leg</ButtonLink> : undefined} />
     <Badge tone={summary.status.tone}>{summary.status.label}</Badge>
     <section aria-labelledby="proposals-heading" className="space-y-4">
       <h2 id="proposals-heading" className="text-base font-bold">Flight proposals <span className="font-normal text-secondary">({proposals.length})</span></h2>
