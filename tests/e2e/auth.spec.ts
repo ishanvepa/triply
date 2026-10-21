@@ -175,6 +175,6 @@ test("default email PKCE confirmation completes in the original browser", async 
   });
   await page.goto(providerLink.toString());
   await expect(page).toHaveURL("http://127.0.0.1:3100/trips");
-  await expect(page.getByRole("heading", { name: "Your next adventure" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Your trips" })).toBeVisible();
   expect(sawCode).toBe(true);
 });

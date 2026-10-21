@@ -10,6 +10,7 @@
     "lint": "eslint .",
     "typecheck": "next typegen && tsc --noEmit",
     "test:auth": "node --experimental-strip-types --test tests/auth.test.mjs",
+    "test:trips": "node --experimental-strip-types --test tests/trips.test.mjs",
     "test:e2e": "playwright test",
     "test:ui": "playwright test --config playwright.ui.config.ts",
     "auth:start": "supabase start --exclude realtime,storage-api,imgproxy,postgres-meta,studio,edge-runtime,logflare,vector,supavisor",
