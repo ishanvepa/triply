@@ -33,11 +33,10 @@ the date window, not voting, flight selection, or booking completion.
   without disclosing whether another group's trip exists.
 
 The **New trip** button navigates to the protected `/trips/new` creation form.
-Opening a trip displays a
-read-only overview with its real name, dates, status, and optional description;
-the full planning dashboard remains Step 2.4. Both destinations include a return
-link. [Step 2.3](invitations.md) adds invitation management, acceptance, and group
-member lists alongside this summary.
+Opening a trip displays the [Step 2.4 dashboard](dashboard.md) with its real
+summary, travel legs, and planning/booking progress. Both destinations include a
+return link. [Step 2.3](invitations.md) adds invitation management, acceptance,
+and group member lists alongside this summary.
 
 ## Creating a trip
 
@@ -61,7 +60,7 @@ the trip ID, defaults `created_by` to `auth.uid()`, enforces RLS, and adds the
 creator as organizer through the existing trigger in the same transaction. No
 additional membership request, service-role client, or migration is needed.
 After insertion, the action revalidates `/trips` and redirects to the new trip's
-read-only overview. The full dashboard remains Step 2.4.
+dashboard.
 
 If the session expires while the form is open, the action redirects to login
 with `/trips/new` as the return destination. Proxy navigation checks defer
@@ -92,8 +91,8 @@ yarn test:e2e
 yarn supabase stop
 ```
 
-Stop an existing development server before the integration run; its server uses
-the same Next.js build directory. Tests create only local users/trips and remove
+Integration tests use a separate `.next-e2e` build directory and can run beside
+the development server. Tests create only local users/trips and remove
 their fixtures afterward. They verify empty/populated lists, organizer and member
 visibility, exclusion of other groups, removed membership, date labels, long names,
 navigation, protected URLs, streamed loading, failure/retry, and mobile/desktop

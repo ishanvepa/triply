@@ -133,10 +133,10 @@ yarn build
 ```
 
 After browser tests, stop the local stack with `yarn supabase stop`. This
-preserves its local database volume. Restart regular development with `yarn dev`.
+preserves its local database volume. Regular development uses `yarn dev`.
 
-Stop any existing `yarn dev` process before browser tests: the test server uses
-port 3100 and the same Next.js build directory. The Playwright config reads only
+Browser tests use port 3100 and an isolated `.next-e2e` build directory, so the
+regular development server can stay running. The Playwright config reads only
 **local** Supabase status and overrides the test server's public API values; it
 never uses `.env.local`'s hosted credentials for signup. Local test accounts are
 deleted afterward. Traces and screenshots are ignored by Git.

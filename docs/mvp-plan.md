@@ -565,6 +565,8 @@ Trip dashboard
 
 ## Step 2.4 — Build the Trip Dashboard
 
+**Implemented:** See [dashboard behavior and verification](dashboard.md).
+
 **Figma reference:** Frame 02
 
 The dashboard provides an overview of the trip.

@@ -59,7 +59,8 @@ yarn typecheck
 yarn build
 ```
 
-For browser integration tests, stop an existing Next.js dev server first, then:
+Browser integration tests use an isolated Next.js build directory and can run
+beside the normal development server:
 
 ```powershell
 yarn auth:start
@@ -74,4 +75,5 @@ permissions, revocation, expired/unknown/malformed tokens, and preserving an
 organizer's role. Native sharing is stubbed so tests send no messages. Local
 fixtures are removed afterward; hosted data and `.env.local` are untouched.
 
-The full flight-planning dashboard remains Step 2.4.
+The [Step 2.4 dashboard](dashboard.md) includes this invitation manager alongside
+travel legs and planning/booking progress.

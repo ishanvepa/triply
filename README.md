@@ -9,6 +9,8 @@ loading and error states, and protected navigation destinations.
 and navigation to the new trip.
 **Step 2.3** adds invitation links, copy/share and revocation, explicit joining,
 and group member lists.
+**Step 2.4** adds the trip dashboard, ordered travel-leg cards, computed planning
+and booking progress, and member-only navigation to existing flight proposals.
 See [database setup and verification](docs/database.md) for migration status and
 the local/hosted workflows. The initial migration has been applied and verified
 on the configured hosted Supabase project.
@@ -18,6 +20,8 @@ See [the design system](docs/design-system.md) for tokens, reusable components,
 and the development preview at `/design-system`.
 See [Trips Home](docs/trips.md) for its behavior, scope, and integration tests.
 See [trip invitations](docs/invitations.md) for link management and the join flow.
+See [the trip dashboard](docs/dashboard.md) for statuses, progress definitions,
+scope, and integration tests.
 
 ## Local development
 
@@ -54,6 +58,7 @@ yarn build
 yarn test:auth
 yarn test:trips
 yarn test:invitations
+yarn test:dashboard
 yarn test:ui
 ```
 
@@ -93,7 +98,9 @@ When flight screens are implemented, show country flags beside airport codes
 and use 24-hour local airport times. Airline logos can wait.
 
 Update `src/config/site.ts` to change the working name and shared description.
-The next application step is **2.4: Build the Trip Dashboard**. `/trips` lists
+The next application step is **2.5: Implement travel legs**. `/trips` lists
 the user's trips, `/trips/new` creates a trip, and `/trips/[tripId]` provides a
-trip summary, members, and invitation management ahead of the full Step 2.4
-dashboard. `/invite/[token]` lets authenticated travelers explicitly join a trip.
+dashboard with trip summary, travel legs, planning/booking progress, members,
+and invitation management. Travel-leg cards open the existing proposals at
+`/trips/[tripId]/legs/[legId]`. `/invite/[token]` lets authenticated travelers
+explicitly join a trip.
