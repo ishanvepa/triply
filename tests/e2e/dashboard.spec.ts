@@ -114,7 +114,8 @@ test("dashboard shows real ordered legs, all statuses, progress, and working pro
   await expect(page).toHaveURL(`http://127.0.0.1:3100/trips/${tripId}/legs/${legs[0]}`);
   await expect(page.getByRole("list", { name: "Flight proposals", exact: true })).toContainText("TAP Air Portugal · TP 1041");
   await expect(page.getByText("Selected flight", { exact: true })).toBeVisible();
-  await expect(page.getByText("Dec 22, 2028, 10:00 GMT+1", { exact: true })).toBeVisible();
+  await expect(page.getByText("10:00", { exact: true })).toBeVisible();
+  await expect(page.getByText("Europe/Madrid", { exact: true })).toBeVisible();
   await expect(page.getByText("EUR 120.00", { exact: true })).toBeVisible();
   await page.screenshot({ path: "test-results/dashboard-proposals-mobile.png", fullPage: true, caret: "initial" });
   await page.getByRole("link", { name: "Go back", exact: true }).click();

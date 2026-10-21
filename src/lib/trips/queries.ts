@@ -72,7 +72,7 @@ export async function getTripLeg(tripId: string, legId: string) {
   if (!isUuid(tripId) || !isUuid(legId)) return null;
   const supabase = await createClient();
   const { data, error } = await supabase.from("trip_legs")
-    .select("id, origin_airport, destination_airport, travel_date, updated_at, proposals:flight_proposals!flight_proposals_trip_leg_id_trip_id_fkey(count)")
+    .select("id, origin_airport, destination_airport, travel_date, updated_at, position, selected_proposal_id, proposals:flight_proposals!flight_proposals_trip_leg_id_trip_id_fkey(count)")
     .eq("trip_id", tripId).eq("id", legId).maybeSingle();
   if (error) throw new Error("Unable to load this travel leg. Please try again.");
   return data;

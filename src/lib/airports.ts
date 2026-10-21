@@ -1,16 +1,16 @@
 // Small display-only catalog. Unknown IATA codes remain usable without guessed metadata.
-const airports: Record<string, { city: string; flag: string }> = {
-  ATL: { city: "Atlanta", flag: "🇺🇸" },
-  BCN: { city: "Barcelona", flag: "🇪🇸" },
-  BER: { city: "Berlin", flag: "🇩🇪" },
-  CDG: { city: "Paris", flag: "🇫🇷" },
-  FCO: { city: "Rome", flag: "🇮🇹" },
-  JFK: { city: "New York", flag: "🇺🇸" },
-  LAX: { city: "Los Angeles", flag: "🇺🇸" },
-  LHR: { city: "London", flag: "🇬🇧" },
-  LIS: { city: "Lisbon", flag: "🇵🇹" },
-  MAD: { city: "Madrid", flag: "🇪🇸" },
-  SFO: { city: "San Francisco", flag: "🇺🇸" },
+const airports: Record<string, { city: string; flag: string; timeZone: string }> = {
+  ATL: { city: "Atlanta", flag: "🇺🇸", timeZone: "America/New_York" },
+  BCN: { city: "Barcelona", flag: "🇪🇸", timeZone: "Europe/Madrid" },
+  BER: { city: "Berlin", flag: "🇩🇪", timeZone: "Europe/Berlin" },
+  CDG: { city: "Paris", flag: "🇫🇷", timeZone: "Europe/Paris" },
+  FCO: { city: "Rome", flag: "🇮🇹", timeZone: "Europe/Rome" },
+  JFK: { city: "New York", flag: "🇺🇸", timeZone: "America/New_York" },
+  LAX: { city: "Los Angeles", flag: "🇺🇸", timeZone: "America/Los_Angeles" },
+  LHR: { city: "London", flag: "🇬🇧", timeZone: "Europe/London" },
+  LIS: { city: "Lisbon", flag: "🇵🇹", timeZone: "Europe/Lisbon" },
+  MAD: { city: "Madrid", flag: "🇪🇸", timeZone: "Europe/Madrid" },
+  SFO: { city: "San Francisco", flag: "🇺🇸", timeZone: "America/Los_Angeles" },
 };
 
 export function getAirport(code: string) {
