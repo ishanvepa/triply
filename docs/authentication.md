@@ -109,6 +109,13 @@ internal return-path request header, so client headers cannot choose an
 unchecked redirect. Logout clears this browser's session and revalidates the
 application layout cache; other devices are unaffected.
 
+Protected Server Action POSTs perform their authentication check inside the
+action so an expired session produces a Next.js action redirect to login.
+The proxy continues refreshing cookies and forwarding the trusted return path;
+it redirects ordinary unauthenticated POST navigation with 303 and GET navigation
+with 307. A `next-action` header is not an authorization signal, and adding it
+to a GET does not bypass route protection.
+
 ## Verification
 
 Use Node.js 22.16+. Docker Desktop is needed for the local Supabase browser

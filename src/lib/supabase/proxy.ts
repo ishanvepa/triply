@@ -38,9 +38,14 @@ export async function updateSession(request: NextRequest) {
   });
 
   const { data, error } = await supabase.auth.getClaims();
-  if (isProtectedPath(request.nextUrl.pathname) && (error || !data?.claims?.sub)) {
+  // Actions independently verify the user. Let them emit Next's action redirect
+  // protocol; a plain proxy redirect cannot be consumed by useActionState.
+  // This marker is not authorization: pages and every protected action still
+  // call requireUser(), even if a caller supplies this header themselves.
+  const actionPost = request.method === "POST" && request.headers.has("next-action");
+  if (isProtectedPath(request.nextUrl.pathname) && !actionPost && (error || !data?.claims?.sub)) {
     const target = new URL(getLoginPath(request.nextUrl.pathname + request.nextUrl.search), request.url);
-    const redirect = NextResponse.redirect(target);
+    const redirect = NextResponse.redirect(target, request.method === "POST" ? 303 : 307);
     for (const cookie of response.cookies.getAll()) redirect.cookies.set(cookie);
     for (const header of ["cache-control", "expires", "pragma"]) {
       const value = response.headers.get(header);

@@ -5,6 +5,8 @@ the Next.js foundation, the **Step 1.3** database schema and RLS, and **Step 1.4
 authentication and the **Step 1.5** design system from [the MVP plan](docs/mvp-plan.md).
 **Step 2.1** adds the membership-scoped Trips Home screen, date/status cards,
 loading and error states, and protected navigation destinations.
+**Step 2.2** adds validated trip creation with automatic organizer membership
+and navigation to the new trip.
 See [database setup and verification](docs/database.md) for migration status and
 the local/hosted workflows. The initial migration has been applied and verified
 on the configured hosted Supabase project.
@@ -87,8 +89,7 @@ When flight screens are implemented, show country flags beside airport codes
 and use 24-hour local airport times. Airline logos can wait.
 
 Update `src/config/site.ts` to change the working name and shared description.
-The next application step is **2.2: Implement trip creation**. `/trips` now lists
-the user's trips. `/trips/new` provides the protected destination for the upcoming
-creation form, and `/trips/[tripId]` provides a read-only overview ahead of the
-full Step 2.4 dashboard. `/invite/[token]` remains a protected return destination
+The next application step is **2.3: Implement trip invitations**. `/trips` lists
+the user's trips, `/trips/new` creates a trip, and `/trips/[tripId]` provides a
+read-only overview ahead of the full Step 2.4 dashboard. `/invite/[token]` remains a protected return destination
 until Step 2.3.

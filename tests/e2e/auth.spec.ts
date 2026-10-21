@@ -30,6 +30,12 @@ async function authCookies(context: BrowserContext) {
 }
 
 test("protected paths preserve their destination and auth callbacks reject open redirects", async ({ page, request, context }) => {
+  const markedGet = await request.get("/trips/new", { headers: { "next-action": "forged" }, maxRedirects: 0 });
+  expect(markedGet.status()).toBe(307);
+  expect(new URL(markedGet.headers().location, "http://127.0.0.1:3100").pathname).toBe("/login");
+  const nativePost = await request.post("/trips/new", { form: { name: "Unauthenticated request" }, maxRedirects: 0 });
+  expect(nativePost.status()).toBe(303);
+  expect(new URL(nativePost.headers().location, "http://127.0.0.1:3100").pathname).toBe("/login");
   for (const path of ["/settings?from=trip", "/trips/example?tab=flights", "/invite/example-token?source=friend"]) {
     await page.goto(path);
     expect(new URL(page.url()).pathname).toBe("/login");

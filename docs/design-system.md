@@ -53,6 +53,7 @@ Import from the individual files under `src/components/ui/`.
 | `Card` | Optional `elevated`, native div attributes, `className` |
 | `Input` | Required `id`, `label`; optional `hint`, `error`; native input attributes |
 | `Select` | Same field API with native `<option>` children; native mobile picker |
+| `Textarea` | Same field API for multiline text; native textarea attributes |
 | `Modal` | Controlled `open`, `onClose`, `title`, optional `description`, children |
 | `Badge` | `tone="neutral\|accent\|success\|warning\|danger"`; include text so status is not color alone |
 | `Avatar` | `name`, `size="sm\|md\|lg"`; accessible initials, no image service dependency |
