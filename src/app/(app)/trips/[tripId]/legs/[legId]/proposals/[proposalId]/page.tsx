@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { AirlineDisplay } from "@/components/flights/airline-display";
 import { FlightSchedule } from "@/components/flights/flight-schedule";
 import { AirportName } from "@/components/trips/airport-name";
+import { ButtonLink } from "@/components/ui/button";
 
 export const metadata = { title: "Flight proposal details" };
 export default async function ProposalPage({ params }: { params: Promise<{ tripId: string; legId: string; proposalId: string }> }) {
@@ -35,5 +36,6 @@ export default async function ProposalPage({ params }: { params: Promise<{ tripI
     </Card>
     {flight.notes && <Card className="space-y-3"><h2 className="text-sm font-bold">Notes</h2><p className="whitespace-pre-wrap break-words text-sm leading-6 [overflow-wrap:anywhere]">{flight.notes}</p></Card>}
     <Card className="space-y-2"><h2 className="text-xs font-semibold uppercase text-accent">Group interest</h2><p className="text-sm">{flight.interest[0]?.count ?? 0} interested in this option · {members.length} {members.length === 1 ? "traveler" : "travelers"} in the group</p></Card>
+    <ButtonLink href={`/trips/${tripId}/legs/${legId}/decision`} variant="outline" className="w-full">Vote and view group decision →</ButtonLink>
   </div>;
 }

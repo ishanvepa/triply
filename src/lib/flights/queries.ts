@@ -32,3 +32,12 @@ export async function getFlightProposal(tripId: string, legId: string, proposalI
   if (error) throw new Error("Unable to load this flight proposal. Please try again.");
   return data;
 }
+
+export async function getFlightVotes(tripId: string, legId: string) {
+  await requireUser();
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("flight_votes").select("user_id, proposal_id")
+    .eq("trip_id", tripId).eq("trip_leg_id", legId);
+  if (error) throw new Error("Unable to load votes. Please try again.");
+  return data;
+}

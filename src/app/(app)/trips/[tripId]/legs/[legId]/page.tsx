@@ -18,6 +18,7 @@ export default async function LegProposalsPage({ params }: { params: Promise<{ t
       action={trip.membership.some(member => member.role === "organizer")
         ? <ButtonLink href={`/trips/${tripId}/legs/${legId}/edit`} variant="outline">Edit leg</ButtonLink> : undefined} />
     <FlightRoute leg={leg} />
+    <ButtonLink href={`/trips/${tripId}/legs/${legId}/decision`} variant="outline" className="w-full">Group decision →</ButtonLink>
     <section aria-labelledby="proposals-heading" className="space-y-4 border-t border-border pt-5">
       <div><h2 id="proposals-heading" className="text-base font-bold">Flight proposals <span className="font-normal text-secondary">({proposals.length})</span></h2>
         <p className="mt-2 text-xs text-secondary">Compare proposed options for this route.</p></div>
