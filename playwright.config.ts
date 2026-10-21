@@ -30,6 +30,7 @@ export default defineConfig({
     reuseExistingServer: false,
     timeout: 120000,
     env: {
+      TRIPLY_E2E: "true",
       NEXT_PUBLIC_SUPABASE_URL: apiUrl,
       NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: anonKey,
       NEXT_PUBLIC_SITE_URL: "http://127.0.0.1:3100",
