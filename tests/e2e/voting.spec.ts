@@ -87,7 +87,9 @@ test("members change one vote, see ties and abstentions; organizer confirms a no
     expect((await db`select selected_proposal_id from public.trip_legs where id = ${f.legId}`)[0].selected_proposal_id).toBeNull();
     await option(page, "Ryanair").getByRole("button", { name: "Review decision →", exact: true }).click();
     await option(page, "Ryanair").getByRole("button", { name: "Confirm selection", exact: true }).click();
-    await expect(page.getByRole("heading", { name: "Flight selected · Voting closed", exact: true })).toBeVisible();
+    await expect(page).toHaveURL(`http://127.0.0.1:3100${f.base}/selected`);
+    await expect(page.getByRole("heading", { name: "Selected flight", exact: true })).toBeVisible();
+    await expect(page.getByRole("region", { name: "Selected flight details", exact: true })).toContainText("Ryanair");
     expect((await db`select selected_proposal_id from public.trip_legs where id = ${f.legId}`)[0].selected_proposal_id).toBe(f.flights[1].id);
     await memberPage.reload();
     await expect(memberPage.getByText("The organizer selected Ryanair for this leg.", { exact: true })).toBeVisible();

@@ -111,12 +111,12 @@ test("dashboard shows real ordered legs, all statuses, progress, and working pro
   // The whole card is a keyboard-accessible link to a real member-only page.
   await list.getByRole("link").first().focus();
   await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(`http://127.0.0.1:3100/trips/${tripId}/legs/${legs[0]}`);
-  await expect(page.getByRole("list", { name: "Flight proposals", exact: true })).toContainText("TAP Air Portugal · TP 1041");
-  await expect(page.getByText("Selected flight", { exact: true })).toBeVisible();
+  await expect(page).toHaveURL(`http://127.0.0.1:3100/trips/${tripId}/legs/${legs[0]}/selected`);
+  await expect(page.getByRole("region", { name: "Selected flight details", exact: true })).toContainText("TAP Air Portugal · TP 1041");
+  await expect(page.getByRole("heading", { name: "Selected flight", exact: true })).toBeVisible();
   await expect(page.getByText("10:00", { exact: true })).toBeVisible();
   await expect(page.getByText("Europe/Madrid", { exact: true })).toBeVisible();
-  await expect(page.getByText("EUR 120.00", { exact: true })).toBeVisible();
+  await expect(page.getByText("EUR 120.00 per person", { exact: true })).toBeVisible();
   await page.screenshot({ path: "test-results/dashboard-proposals-mobile.png", fullPage: true, caret: "initial" });
   await page.getByRole("link", { name: "Go back", exact: true }).click();
   await page.getByRole("list", { name: "Travel legs", exact: true }).getByRole("link").nth(1).click();

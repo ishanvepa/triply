@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { requireUser } from "@/lib/auth/session";
 import { createClient } from "@/lib/supabase/server";
 import { getFlightLegContext, getFlightProposal } from "@/lib/flights/queries";
@@ -20,6 +21,7 @@ export async function submitDecision(
     revalidatePath(`/trips/${tripId}`);
     revalidatePath(`/trips/${tripId}/legs/${legId}`);
     revalidatePath(`/trips/${tripId}/legs/${legId}/decision`);
+    revalidatePath(`/trips/${tripId}/legs/${legId}/selected`);
     revalidatePath("/trips/[tripId]/legs/[legId]/proposals/[proposalId]", "page");
   };
   if (context.leg.selected_proposal_id) {
@@ -40,7 +42,7 @@ export async function submitDecision(
     refresh();
     if (error) return { error: "We couldn't select this flight. Refresh the results and try again." };
     if (!data.length) return { error: "This leg changed or a flight was selected. Review the latest decision." };
-    return { success: "Flight selected. Voting is now closed." };
+    redirect(`/trips/${tripId}/legs/${legId}/selected`);
   }
   if (intent !== "vote") return { error: "Choose a valid action." };
   // Ownership comes from the verified session and auth.uid(), never submitted fields.

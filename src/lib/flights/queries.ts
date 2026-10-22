@@ -41,3 +41,13 @@ export async function getFlightVotes(tripId: string, legId: string) {
   if (error) throw new Error("Unable to load votes. Please try again.");
   return data;
 }
+
+export async function getFlightBookings(tripId: string, legId: string, proposalId: string) {
+  await requireUser();
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("flight_bookings")
+    .select("trip_leg_id, proposal_id, user_id, status")
+    .eq("trip_id", tripId).eq("trip_leg_id", legId).eq("proposal_id", proposalId);
+  if (error) throw new Error("Unable to load flight booking progress. Please try again.");
+  return data;
+}

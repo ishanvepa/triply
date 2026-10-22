@@ -30,6 +30,7 @@ export default async function DecisionPage({ params }: { params: Promise<{ tripI
     <p className="text-xs font-bold uppercase text-secondary"><AirportName code={leg.origin_airport} /> → <AirportName code={leg.destination_airport} /> · {results.eligible} travelers</p>
     <div className="flex flex-wrap items-center justify-between gap-2"><p className="text-sm text-secondary">{results.cast} of {results.eligible} votes cast · {results.undecided} undecided</p><RefreshDecision /></div>
     {leg.selected_proposal_id && <Card className="space-y-2 border-success [&]:bg-success-surface"><h2 className="font-bold text-success">Flight selected · Voting closed</h2><p className="text-sm">The organizer selected {flights.find(f => f.id === leg.selected_proposal_id)?.airline || "a flight"} for this leg.</p></Card>}
+    {leg.selected_proposal_id && <ButtonLink href={`${base}/selected`} className="w-full">View selected flight →</ButtonLink>}
     {flights.length ? <ul aria-label="Voting results" className="space-y-4">
       {ranked.map(result => {
         const flight = flights.find(f => f.id === result.id)!;
