@@ -30,7 +30,8 @@ Proposal deletion and member departure controls are not added by this step.
 The organizer can choose **Review decision** on any proposal, including a
 non-leading option or one with no votes. The inline review identifies the flight
 and explains that confirming selects it for everyone and closes voting.
-**Cancel** makes no write. **Confirm selection** saves the decision.
+**Cancel** makes no write. **Confirm selection** saves the decision and opens
+the [Selected Flight screen](selected-flights.md).
 
 After selection, everyone sees the selected airline, the selected proposal's
 status, and **Voting closed**. All vote and selection controls are removed.
@@ -38,8 +39,9 @@ The dashboard and proposal cards/details reflect the selection. Existing votes
 remain available as the group's recorded preferences; results continue to use
 current membership rather than claiming a historical snapshot.
 
-The dedicated Selected Flight screen and individual booking coordination remain
-Phase 3. This step does not expose reopening or replacing a decision.
+Step 3.1 adds the Selected Flight screen and links to it from the dashboard,
+options, and decision results. Individual booking status editing remains Step 3.2.
+The interface does not expose reopening or replacing a decision.
 
 ## Writes and concurrency
 

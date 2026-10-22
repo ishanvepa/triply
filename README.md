@@ -17,6 +17,8 @@ with proposal locks and stale-update protection.
 schedules, optional prices/booking links/notes, and airline-name display.
 **Step 2.7** adds changeable member votes, support percentages and ties, and
 organizer-confirmed flight selection that closes voting for the leg.
+**Step 3.1** adds the Selected Flight screen with the chosen schedule, proposed
+price, external booking action, and current group booking progress.
 See [database setup and verification](docs/database.md) for migration status and
 the local/hosted workflows. The initial migration has been applied and verified
 on the configured hosted Supabase project.
@@ -31,6 +33,7 @@ scope, and integration tests.
 See [travel legs](docs/travel-legs.md) for forms, ordering, and migration details.
 See [flight proposals](docs/flights.md) for manual entry, schedules, and verification.
 See [group decisions](docs/voting.md) for voting rules, confirmation, and verification.
+See [selected flights](docs/selected-flights.md) for booking links and progress display.
 
 ## Local development
 
@@ -110,11 +113,12 @@ Flight screens show available country flags beside airport codes and use
 24-hour local airport times. Airline names provide a consistent text fallback.
 
 Update `src/config/site.ts` to change the working name and shared description.
-The next application step is **3.1: Implement the Selected Flight screen**. `/trips` lists
+The next application step is **3.2: Implement individual booking statuses**. `/trips` lists
 the user's trips, `/trips/new` creates a trip, and `/trips/[tripId]` provides a
 dashboard with trip summary, travel legs, planning/booking progress, members,
-and invitation management. Travel-leg cards open the existing proposals at
-`/trips/[tripId]/legs/[legId]`. `/invite/[token]` lets authenticated travelers
+and invitation management. Travel-leg cards open proposals at
+`/trips/[tripId]/legs/[legId]` while a decision is pending, and the chosen flight
+at `.../selected` after selection. `/invite/[token]` lets authenticated travelers
 explicitly join a trip.
 Organizers add legs at `/trips/[tripId]/legs/new`, edit them from their proposal
 page, and reorder them on the dashboard.
@@ -122,3 +126,5 @@ Members propose flights from a leg's **+ Propose option** action, enter details
 at `.../proposals/new/manual`, and open shared details at `.../proposals/[proposalId]`.
 The **Group decision** action opens `.../decision` for voting, results, and
 organizer confirmation. Members can refresh results to see other travelers' changes.
+Confirming a selection opens the Selected Flight screen. Each traveler books
+externally; the proposed price and seat availability are not guaranteed.
